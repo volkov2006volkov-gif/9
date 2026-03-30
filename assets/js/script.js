@@ -70,7 +70,10 @@ for (let i = 0; i < selectItems.length; i++) {
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
     elementToggleFunc(select);
-    filterFunc(selectedValue);
+    
+    // convert Russian to English for filtering
+    let englishValue = filterNameMap[selectedValue] || selectedValue;
+    filterFunc(englishValue);
 
   });
 }
@@ -78,13 +81,24 @@ for (let i = 0; i < selectItems.length; i++) {
 // filter variables
 const filterItems = document.querySelectorAll("[data-filter-item]");
 
+// map Russian filter names to English category names
+const filterNameMap = {
+  "все": "all",
+  "веб-дизайн": "web design",
+  "приложения": "applications",
+  "веб-разработка": "web development"
+};
+
 const filterFunc = function (selectedValue) {
+  
+  // convert Russian to English if needed
+  let englishValue = filterNameMap[selectedValue] || selectedValue;
 
   for (let i = 0; i < filterItems.length; i++) {
 
-    if (selectedValue === "all") {
+    if (englishValue === "all") {
       filterItems[i].classList.add("active");
-    } else if (selectedValue === filterItems[i].dataset.category) {
+    } else if (englishValue === filterItems[i].dataset.category) {
       filterItems[i].classList.add("active");
     } else {
       filterItems[i].classList.remove("active");
@@ -103,7 +117,10 @@ for (let i = 0; i < filterBtn.length; i++) {
 
     let selectedValue = this.innerText.toLowerCase();
     selectValue.innerText = this.innerText;
-    filterFunc(selectedValue);
+    
+    // convert Russian to English for filtering
+    let englishValue = filterNameMap[selectedValue] || selectedValue;
+    filterFunc(englishValue);
 
     lastClickedBtn.classList.remove("active");
     this.classList.add("active");
@@ -140,20 +157,32 @@ for (let i = 0; i < formInputs.length; i++) {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
+// map Russian button text to English page names
+const pageNameMap = {
+  "обо мне": "about",
+  "резюме": "resume",
+  "портфолио": "portfolio",
+  "блог": "blog",
+  "контакты": "contact"
+};
+
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
 
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
+    let selectedValue = pageNameMap[this.innerText.toLowerCase()];
+    
+    for (let j = 0; j < pages.length; j++) {
+      if (selectedValue === pages[j].dataset.page) {
+        pages[j].classList.add("active");
+        navigationLinks[j].classList.add("active");
       } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+        pages[j].classList.remove("active");
+        navigationLinks[j].classList.remove("active");
       }
     }
+    
+    window.scrollTo(0, 0);
 
   });
 }
