@@ -18,56 +18,62 @@
 :root {
 
   /**
-   * colors
+   * colors - Rick and Morty Theme
    */
 
   /* gradient */
 
   --bg-gradient-onyx: linear-gradient(
-    to bottom right, 
-    hsl(240, 1%, 25%) 3%, 
-    hsl(0, 0%, 19%) 97%
+    to bottom right,
+    hsl(180, 100%, 25%) 3%,
+    hsl(280, 100%, 20%) 97%
   );
   --bg-gradient-jet: linear-gradient(
-    to bottom right, 
-    hsla(240, 1%, 18%, 0.251) 0%, 
-    hsla(240, 2%, 11%, 0) 100%
-  ), hsl(240, 2%, 13%);
+    to bottom right,
+    hsla(180, 100%, 20%, 0.251) 0%,
+    hsla(280, 100%, 15%, 0) 100%
+  ), hsl(180, 50%, 15%);
   --bg-gradient-yellow-1: linear-gradient(
-    to bottom right, 
-    hsl(45, 100%, 71%) 0%, 
-    hsla(36, 100%, 69%, 0) 50%
+    to bottom right,
+    hsl(120, 100%, 45%) 0%,
+    hsla(180, 100%, 50%, 0) 50%
   );
   --bg-gradient-yellow-2: linear-gradient(
-    135deg, 
-    hsla(45, 100%, 71%, 0.251) 0%, 
-    hsla(35, 100%, 68%, 0) 59.86%
-  ), hsl(240, 2%, 13%);
+    135deg,
+    hsla(120, 100%, 45%, 0.251) 0%,
+    hsla(180, 100%, 50%, 0) 59.86%
+  ), hsl(180, 50%, 15%);
   --border-gradient-onyx: linear-gradient(
-    to bottom right, 
-    hsl(0, 0%, 25%) 0%, 
-    hsla(0, 0%, 25%, 0) 50%
+    to bottom right,
+    hsl(120, 100%, 35%) 0%,
+    hsla(120, 100%, 35%, 0) 50%
   );
   --text-gradient-yellow: linear-gradient(
-    to right, 
-    hsl(45, 100%, 72%), 
-    hsl(35, 100%, 68%)
+    to right,
+    hsl(120, 100%, 55%),
+    hsl(180, 100%, 50%)
   );
 
   /* solid */
 
-  --jet: hsl(0, 0%, 22%);
-  --onyx: hsl(240, 1%, 17%);
-  --eerie-black-1: hsl(240, 2%, 13%);
-  --eerie-black-2: hsl(240, 2%, 12%);
+  --jet: hsl(180, 20%, 22%);
+  --onyx: hsl(180, 50%, 17%);
+  --eerie-black-1: hsl(180, 50%, 13%);
+  --eerie-black-2: hsl(180, 50%, 12%);
   --smoky-black: hsl(0, 0%, 7%);
   --white-1: hsl(0, 0%, 100%);
   --white-2: hsl(0, 0%, 98%);
-  --orange-yellow-crayola: hsl(45, 100%, 72%);
-  --vegas-gold: hsl(45, 54%, 58%);
+  --orange-yellow-crayola: hsl(120, 100%, 45%);
+  --vegas-gold: hsl(180, 54%, 48%);
   --light-gray: hsl(0, 0%, 84%);
   --light-gray-70: hsla(0, 0%, 84%, 0.7);
   --bittersweet-shimmer: hsl(0, 43%, 51%);
+  
+  /* Rick and Morty specific colors */
+  --portal-green: hsl(120, 100%, 45%);
+  --rick-blue: hsl(180, 100%, 50%);
+  --morty-yellow: hsl(45, 100%, 55%);
+  --space-purple: hsl(280, 100%, 35%);
 
   /**
    * typography
@@ -95,12 +101,12 @@
   /**
    * shadow
    */
-  
-  --shadow-1: -4px 8px 24px hsla(0, 0%, 0%, 0.25);
-  --shadow-2: 0 16px 30px hsla(0, 0%, 0%, 0.25);
-  --shadow-3: 0 16px 40px hsla(0, 0%, 0%, 0.25);
-  --shadow-4: 0 25px 50px hsla(0, 0%, 0%, 0.15);
-  --shadow-5: 0 24px 80px hsla(0, 0%, 0%, 0.25);
+
+  --shadow-1: -4px 8px 24px hsla(120, 100%, 30%, 0.25);
+  --shadow-2: 0 16px 30px hsla(120, 100%, 30%, 0.25);
+  --shadow-3: 0 16px 40px hsla(120, 100%, 30%, 0.25);
+  --shadow-4: 0 25px 50px hsla(120, 100%, 30%, 0.15);
+  --shadow-5: 0 24px 80px hsla(120, 100%, 30%, 0.25);
 
   /**
    * transition
@@ -147,15 +153,40 @@ input, textarea {
 }
 
 ::selection {
-  background: var(--orange-yellow-crayola);
+  background: var(--portal-green);
   color: var(--smoky-black);
 }
 
-:focus { outline-color: var(--orange-yellow-crayola); }
+:focus { outline-color: var(--portal-green); }
 
 html { font-family: var(--ff-poppins); }
 
-body { background: var(--smoky-black); }
+body { 
+  background: var(--smoky-black);
+  background-image: 
+    radial-gradient(circle at 20% 30%, hsla(120, 100%, 45%, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, hsla(180, 100%, 50%, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, hsla(280, 100%, 35%, 0.05) 0%, transparent 70%);
+}
+
+/* Portal glow effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, hsla(120, 100%, 45%, 0.03) 0%, transparent 70%);
+  animation: portal-swirl 30s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes portal-swirl {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 
 
@@ -192,7 +223,7 @@ article {
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  color: var(--orange-yellow-crayola);
+  color: var(--portal-green);
   box-shadow: var(--shadow-1);
   z-index: 1;
 }
@@ -226,6 +257,7 @@ article.active {
 .h5 {
   color: var(--white-2);
   text-transform: capitalize;
+  text-shadow: 0 0 10px hsla(120, 100%, 45%, 0.3);
 }
 
 .h2 { font-size: var(--fs-1); }
@@ -253,6 +285,7 @@ article.active {
   height: 3px;
   background: var(--text-gradient-yellow);
   border-radius: 3px;
+  box-shadow: 0 0 10px var(--portal-green);
 }
 
 .has-scrollbar::-webkit-scrollbar {
@@ -263,11 +296,13 @@ article.active {
 .has-scrollbar::-webkit-scrollbar-track {
   background: var(--onyx);
   border-radius: 5px;
+  box-shadow: 0 0 5px var(--portal-green);
 }
 
 .has-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--orange-yellow-crayola);
+  background: var(--portal-green);
   border-radius: 5px;
+  box-shadow: 0 0 10px var(--portal-green);
 }
 
 .has-scrollbar::-webkit-scrollbar-button { width: 20px; }
@@ -379,7 +414,10 @@ main {
 }
 
 .info_more-btn:hover,
-.info_more-btn:focus { background: var(--bg-gradient-yellow-1); }
+.info_more-btn:focus { 
+  background: var(--bg-gradient-yellow-1);
+  box-shadow: 0 0 15px var(--portal-green);
+}
 
 .info_more-btn:hover::before,
 .info_more-btn:focus::before { background: var(--bg-gradient-yellow-2); }
@@ -444,7 +482,10 @@ main {
 }
 
 
-.social-item .social-link:hover { color: var(--light-gray); }
+.social-item .social-link:hover { 
+  color: var(--portal-green);
+  text-shadow: 0 0 10px var(--portal-green);
+}
 
 
 
@@ -459,11 +500,11 @@ main {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: hsla(240, 1%, 17%, 0.75);
+  background: hsla(180, 50%, 17%, 0.85);
   backdrop-filter: blur(10px);
   border: 1px solid var(--jet);
   border-radius: 12px 12px 0 0;
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--shadow-2), 0 0 20px hsla(120, 100%, 45%, 0.3);
   z-index: 5;
 }
 
@@ -483,9 +524,15 @@ main {
 }
 
 .navbar-link:hover,
-.navbar-link:focus { color: var(--light-gray-70); }
+.navbar-link:focus { 
+  color: var(--portal-green);
+  text-shadow: 0 0 8px var(--portal-green);
+}
 
-.navbar-link.active { color: var(--orange-yellow-crayola); }
+.navbar-link.active { 
+  color: var(--portal-green);
+  text-shadow: 0 0 10px var(--portal-green);
+}
 
 
 
@@ -816,11 +863,17 @@ main {
   position: absolute;
   top: 5px;
   left: -33px;
-  height: 6px;
-  width: 6px;
-  background: var(--text-gradient-yellow);
+  height: 8px;
+  width: 8px;
+  background: var(--portal-green);
   border-radius: 50%;
-  box-shadow: 0 0 0 4px var(--jet);
+  box-shadow: 0 0 0 4px var(--jet), 0 0 10px var(--portal-green);
+  animation: portal-pulse 2s ease-in-out infinite;
+}
+
+@keyframes portal-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px var(--jet), 0 0 10px var(--portal-green); }
+  50% { box-shadow: 0 0 0 6px var(--jet), 0 0 20px var(--portal-green), 0 0 30px var(--portal-green); }
 }
 
 .timeline-text {
@@ -865,6 +918,20 @@ main {
   background: var(--text-gradient-yellow);
   height: 100%;
   border-radius: inherit;
+  box-shadow: 0 0 10px var(--portal-green);
+  position: relative;
+}
+
+.skill-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--white-1);
+  border-radius: inherit;
+  opacity: 0.5;
 }
 
 
@@ -979,8 +1046,8 @@ main {
 .project-item-icon-box {
   --scale: 0.8;
 
-  background: var(--jet);
-  color: var(--orange-yellow-crayola);
+  background: var(--onyx);
+  color: var(--portal-green);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -991,6 +1058,8 @@ main {
   opacity: 0;
   z-index: 1;
   transition: var(--transition-1);
+  box-shadow: 0 0 20px var(--portal-green);
+  border: 1px solid var(--portal-green);
 }
 
 .project-item > a:hover .project-item-icon-box {
@@ -1164,7 +1233,10 @@ main {
 
 .form-input::placeholder { font-weight: var(--fw-500); }
 
-.form-input:focus { border-color: var(--orange-yellow-crayola); }
+.form-input:focus { 
+  border-color: var(--portal-green);
+  box-shadow: 0 0 10px hsla(120, 100%, 45%, 0.3);
+}
 
 textarea.form-input {
   min-height: 100px;
@@ -1182,7 +1254,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   position: relative;
   width: 100%;
   background: var(--border-gradient-onyx);
-  color: var(--orange-yellow-crayola);
+  color: var(--portal-green);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1194,23 +1266,14 @@ textarea.form-input::-webkit-resizer { display: none; }
   box-shadow: var(--shadow-3);
   z-index: 1;
   transition: var(--transition-1);
+  border: 1px solid var(--portal-green);
 }
 
-.form-btn::before {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  background: var(--bg-gradient-jet);
-  border-radius: inherit;
-  z-index: -1;
-  transition: var(--transition-1);
+.form-btn:hover { 
+  background: var(--bg-gradient-yellow-1);
+  box-shadow: 0 0 20px var(--portal-green);
+  text-shadow: 0 0 5px var(--portal-green);
 }
-
-.form-btn ion-icon { font-size: 16px; }
-
-.form-btn:hover { background: var(--bg-gradient-yellow-1); }
-
-.form-btn:hover::before { background: var(--bg-gradient-yellow-2); }
 
 .form-btn:disabled {
   opacity: 0.7;
@@ -1219,7 +1282,7 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .form-btn:disabled:hover { background: var(--border-gradient-onyx); }
 
-.form-btn:disabled:hover::before { background: var(--bg-gradient-jet); }
+.form-btn ion-icon { font-size: 16px; }
 
 
 
@@ -1618,9 +1681,15 @@ textarea.form-input::-webkit-resizer { display: none; }
     transition: var(--transition-1);
   }
 
-  .filter-item button:hover { color: var(--light-gray-70); }
+  .filter-item button:hover { 
+    color: var(--portal-green);
+    text-shadow: 0 0 8px var(--portal-green);
+  }
 
-  .filter-item button.active { color: var(--orange-yellow-crayola); }
+  .filter-item button.active { 
+    color: var(--portal-green);
+    text-shadow: 0 0 10px var(--portal-green);
+  }
 
   /* portfolio and blog grid */
 
@@ -1776,13 +1845,16 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   body::-webkit-scrollbar-thumb {
     border: 5px solid var(--smoky-black);
-    background: hsla(0, 0%, 100%, 0.1);
+    background: hsla(120, 100%, 45%, 0.3);
     border-radius: 20px;
-    box-shadow: inset 1px 1px 0 hsla(0, 0%, 100%, 0.11),
-                inset -1px -1px 0 hsla(0, 0%, 100%, 0.11);
+    box-shadow: inset 1px 1px 0 hsla(120, 100%, 45%, 0.5),
+                inset -1px -1px 0 hsla(120, 100%, 45%, 0.5);
   }
 
-  body::-webkit-scrollbar-thumb:hover { background: hsla(0, 0%, 100%, 0.15); }
+  body::-webkit-scrollbar-thumb:hover { 
+    background: hsla(120, 100%, 45%, 0.5);
+    box-shadow: 0 0 20px var(--portal-green);
+  }
 
   body::-webkit-scrollbar-button { height: 60px; }
 
